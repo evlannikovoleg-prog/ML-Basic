@@ -21,13 +21,27 @@ class Vehicle(ABC):
                 print("Стартуем...")
                 self.started = True
             else:
-                #print("HE Стартуем...")
+                # print("HE Стартуем...")
                 raise LowFuelError()
+    # метод move, который проверяет,
+# что топлива достаточно для преодоления переданной дистанции
+# (вплоть до полного расхода),
+# и изменяет количество оставшегося топлива, иначе выкидывает
+# исключение exceptions.NotEnoughFuel
+    def move(self, distance):
+        print(f"Топлива в баке: {self.fuel}л.")
+        fuel_needed = distance * self.fuel_consumption
+        if fuel_needed > self.fuel:
+            print("Маловато горючки.")
+            raise NotEnoughFuel(distance, self.fuel)
+        else:
+            print(f"На маршрут {distance}км. при таком расходе ({self.fuel_consumption}л/км) уйдёт {fuel_needed}л. топлива... "
+                  f"Многовато, конечно, но останется ещё {self.fuel - self.fuel_consumption}л.")
 
-            
     pass
 
 
 if __name__ == "__main__":
-    car = Vehicle(100, False, 0, 150)
+    car = Vehicle(100, False, 10, 150)
     car.start()
+    car.move(5)
