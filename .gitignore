@@ -7,4 +7,6 @@ __pycache__
 *.pyd
 *.db
 *.sqlite3
+*.xlsx
+*.xls
 buf
